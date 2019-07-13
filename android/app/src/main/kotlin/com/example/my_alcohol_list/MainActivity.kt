@@ -1,4 +1,4 @@
-package com.example.my_alcohol_list
+package vitaty14.kg.my_alcohol_list
 
 import android.os.Bundle
 
