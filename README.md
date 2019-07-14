@@ -2,6 +2,10 @@
 
 飲んだ酒を記録するやつ
 
+## 何ができる
+- 飲んだお酒を保存できる
+- アルコールと友達になれる(かも)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
