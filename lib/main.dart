@@ -66,7 +66,7 @@ class TextFieldAlertDialog extends State<_MyHomePageState> {
     _counter++;
     data.add({ "id": _counter, "content": inputText});
     setState(() {
-
+      Navigator.pop(context);
     });
   }
 
