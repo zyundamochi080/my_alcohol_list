@@ -13,14 +13,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: TextFieldAlertDialog(),
+      home: _MyHomePageState(),
     );
   }
 }
 
 //app entry point end
 
-class TextFieldAlertDialog extends StatelessWidget {
+class _MyHomePageState extends StatefulWidget {
+  _MyHomePageState({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  TextFieldAlertDialog createState() => new TextFieldAlertDialog();
+}
+
+class TextFieldAlertDialog extends State<_MyHomePageState> {
   TextEditingController _textFieldController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
@@ -30,6 +38,7 @@ class TextFieldAlertDialog extends StatelessWidget {
   ];
 
   int _counter = 3;
+  int _checkCounter = 0;
 
   _displayDialog(BuildContext context) async {
     print('_displaydialog');
@@ -47,7 +56,7 @@ class TextFieldAlertDialog extends StatelessWidget {
               new FlatButton(
                 child: new Text('OK'),
                 onPressed: () => _submission(_textFieldController.text),
-              )
+              ),
             ],
           );
         });
@@ -56,31 +65,33 @@ class TextFieldAlertDialog extends StatelessWidget {
     print('_submission');
     _counter++;
     data.add({ "id": _counter, "content": inputText});
-  }
+    setState(() {
 
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('debug');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('my_alcohol_list'),
-      ),
-      body: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (int, context) {
-          return Padding(
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('my_alcohol_list'),
+        ),
+        body: ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (int, context) {
+            return Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(data[0].toString()),
-          );
-        },
-      ),
-    floatingActionButton: FloatingActionButton(
-        onPressed: () => _displayDialog(context),
-        tooltip: 'Add',
-        child: Icon(Icons.add),
-      ),
-    );
+              child: Text(data[context].toString()),
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _displayDialog(context),
+          tooltip: 'Add',
+          child: Icon(Icons.add),
+        ),
+      );
   }
 
 }
