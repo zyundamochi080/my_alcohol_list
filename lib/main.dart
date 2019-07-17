@@ -30,6 +30,13 @@ class _MyHomePageState extends StatefulWidget {
 
 class TextFieldAlertDialog extends State<_MyHomePageState> {
   TextEditingController _textFieldController = TextEditingController();
+  SharedPreferences sharedPreferences;
+
+  getValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dataId = prefs.getString('id');
+    dataContent = prefs.getString('content');
+  }
 
   List<Map<String, dynamic>> data = [
     { "id" : 1,  "content" : "Content 1" },
@@ -39,6 +46,9 @@ class TextFieldAlertDialog extends State<_MyHomePageState> {
 
   int _counter = 3;
   int _checkCounter = 0;
+  String _saveCounter;
+  String dataId;
+  String dataContent;
 
   _displayDialog(BuildContext context) async {
     print('_displaydialog');
@@ -61,11 +71,15 @@ class TextFieldAlertDialog extends State<_MyHomePageState> {
           );
         });
   }
-  void _submission(String inputText) {
+  void _submission(String inputText) async {
+    sharedPreferences = await SharedPreferences.getInstance();
     print('_submission');
     _counter++;
+    _saveCounter = _counter.toString();
     data.add({ "id": _counter, "content": inputText});
     setState(() {
+      sharedPreferences.setString("id",_saveCounter);
+      sharedPreferences.setString("content", inputText);
       Navigator.pop(context);
     });
   }
