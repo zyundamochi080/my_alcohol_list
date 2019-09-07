@@ -23,16 +23,46 @@ class MyHomePageState extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePageState> {
 
-  DocumentList documentList = DocumentList("task list",
+  DocumentList documentList = DocumentList("my_alcohol_list",
     labels: {"日付": "date", "銘柄名": "task", "種類": "note", "メモ": "text"});
 
   @override
   Widget build(BuildContext context) {
     return DocumentListScaffold(
       documentList,
-      title: "一覧",
-      titleKeys: ["date","task","note"],
-      subtitleKey: "text",
+      emptyListWidget: Center(
+        child: Text("Click the add button to create your drink list"),
+      ),
+      customItemBuilder: customItemBuilder,
     );
   }
+
+  Widget customItemBuilder(int index, Document doc, BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Text(
+            doc["date"],
+            style: textTheme.display1,
+          ),
+          Text(
+            doc["task"],
+            style: textTheme.headline,
+          ),
+          Text(
+            doc["note"],
+            style: textTheme.subhead,
+          ),
+          Text(
+            doc["text"],
+            style: textTheme.headline,
+          ),
+          DocumentActionsButton(documentList, index: index),
+        ],
+      ),
+    );
+  }
+
 }
