@@ -1,111 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rapido/rapido.dart';
 
 void main() => runApp(MyApp());
-
-//app entry point
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'my_alcohol_list',
-      theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-      ),
-      home: _MyHomePageState(),
+      home: MyHomePageState(),
     );
   }
 }
 
-//app entry point end
-
-class _MyHomePageState extends StatefulWidget {
-  _MyHomePageState({Key key, this.title}) : super(key: key);
+class MyHomePageState extends StatefulWidget {
+  MyHomePageState({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  TextFieldAlertDialog createState() => new TextFieldAlertDialog();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class TextFieldAlertDialog extends State<_MyHomePageState> {
-  TextEditingController _textFieldController = TextEditingController();
-  SharedPreferences sharedPreferences;
+class _MyHomePageState extends State<MyHomePageState> {
 
-  getValuesSF() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dataId = prefs.getString('id');
-    dataContent = prefs.getString('content');
-  }
-
-  List<Map<String, dynamic>> data = [
-    { "id" : 1,  "content" : "Content 1" },
-    { "id" : 2,  "content" : "Content 2" },
-    { "id" : 3,  "content" : "Content 3" }
-  ];
-
-  int _counter = 3;
-  int _checkCounter = 0;
-  String _saveCounter;
-  String dataId;
-  String dataContent;
-
-  _displayDialog(BuildContext context) async {
-    print('_displaydialog');
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Add alcohol'),
-            content: TextField(
-              controller: _textFieldController,
-              autofocus: true,
-              decoration: InputDecoration(labelText: 'Bland Name', hintText: 'ex.hoge beer'),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('OK'),
-                onPressed: () => _submission(_textFieldController.text),
-              ),
-            ],
-          );
-        });
-  }
-  void _submission(String inputText) async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    print('_submission');
-    _counter++;
-    _saveCounter = _counter.toString();
-    data.add({ "id": _counter, "content": inputText});
-    setState(() {
-      sharedPreferences.setString("id",_saveCounter);
-      sharedPreferences.setString("content", inputText);
-      Navigator.pop(context);
-    });
-  }
+  DocumentList documentList = DocumentList("task list",
+    labels: {"開始日": "date", "タイトル": "task", "メモ": "note"});
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('debug');
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('my_alcohol_list'),
-        ),
-        body: ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (int, context) {
-            return Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(data[context].toString()),
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _displayDialog(context),
-          tooltip: 'Add',
-          child: Icon(Icons.add),
-        ),
-      );
+    return DocumentListScaffold(
+      documentList,
+      title: "一覧",
+      titleKeys: ["date","task"],
+      subtitleKey: "note",
+    );
   }
-
 }
