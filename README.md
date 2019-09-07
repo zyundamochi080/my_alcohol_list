@@ -4,7 +4,11 @@
 
 ## 何ができる
 - 飲んだお酒を保存できる
-- アルコールと友達になれる(かも)
+
+### ライブラリ
+- rapido
+  - [github](https://github.com/rapido-mobile/rapido-flutter)
+  - [github.io](https://rapido-mobile.github.io/tutorials/introduction.html)
 
 ## Getting Started
 
