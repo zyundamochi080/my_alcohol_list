@@ -2,6 +2,14 @@
 
 飲んだ酒を記録するやつ
 
+## 何ができる
+- 飲んだお酒を保存できる
+
+### ライブラリ
+- rapido
+  - [github](https://github.com/rapido-mobile/rapido-flutter)
+  - [github.io](https://rapido-mobile.github.io/tutorials/introduction.html)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
