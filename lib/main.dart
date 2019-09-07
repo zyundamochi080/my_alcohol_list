@@ -24,15 +24,15 @@ class MyHomePageState extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePageState> {
 
   DocumentList documentList = DocumentList("task list",
-    labels: {"開始日": "date", "タイトル": "task", "メモ": "note"});
+    labels: {"日付": "date", "銘柄名": "task", "種類": "note", "メモ": "text"});
 
   @override
   Widget build(BuildContext context) {
     return DocumentListScaffold(
       documentList,
       title: "一覧",
-      titleKeys: ["date","task"],
-      subtitleKey: "note",
+      titleKeys: ["date","task","note"],
+      subtitleKey: "text",
     );
   }
 }
