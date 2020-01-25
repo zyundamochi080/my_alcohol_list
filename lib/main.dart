@@ -22,7 +22,6 @@ class MyHomePageState extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePageState> {
-
   DocumentList documentList = DocumentList("my_alcohol_list",
     labels: {"日付": "date", "銘柄名": "task", "種類": "note", "メモ": "text"});
 
@@ -30,6 +29,9 @@ class _MyHomePageState extends State<MyHomePageState> {
   Widget build(BuildContext context) {
     return DocumentListScaffold(
       documentList,
+      additionalActions: <Widget>[
+        IconButton(icon: Icon(Icons.arrow_upward), onPressed: () {})
+      ],
       emptyListWidget: Center(
         child: Text("Click the add button to create your drink list"),
       ),
