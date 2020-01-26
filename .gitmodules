@@ -1,0 +1,3 @@
+[submodule "rapido-flutter"]
+	path = rapido-flutter
+	url = https://github.com/zyundamochi080/rapido-flutter

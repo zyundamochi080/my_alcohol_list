@@ -243,7 +243,7 @@ packages:
   rapido:
     dependency: "direct main"
     description:
-      path: rapido-flutter-edit
+      path: rapido-flutter
       relative: true
     source: path
     version: "0.1.9"

@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   package_info: ^0.4.0
   rapido:
-    path: ./rapido-flutter-edit/
+    path: ./rapido-flutter/
 
 dev_dependencies:
   flutter_test:
