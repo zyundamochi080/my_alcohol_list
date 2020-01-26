@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rapido/rapido.dart';
+import 'package:package_info/package_info.dart';
 
 void main() => runApp(MyApp());
 
@@ -66,12 +67,15 @@ class _MyHomePageState extends State<MyHomePageState> {
       ),
     );
   }
-
+  
   void exportAlcoholList() {
-    showAboutDialog(
-      context: context,
-      applicationName: "my_alcohol_list",
-    );
+    PackageInfo.fromPlatform().then((packageInfo) {
+      showAboutDialog(
+        context: context,
+        applicationName: packageInfo.appName,
+        applicationVersion: packageInfo.version,
+      );
+    });
   }
 
 }
