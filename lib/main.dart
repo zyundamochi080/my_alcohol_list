@@ -23,14 +23,14 @@ class MyHomePageState extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePageState> {
   DocumentList documentList = DocumentList("my_alcohol_list",
-    labels: {"日付": "date", "銘柄名": "task", "種類": "note", "メモ": "text"});
+      labels: {"日付": "date", "銘柄名": "task", "種類": "note", "メモ": "text"});
 
   @override
   Widget build(BuildContext context) {
     return DocumentListScaffold(
       documentList,
       additionalActions: <Widget>[
-        IconButton(icon: Icon(Icons.arrow_upward), onPressed: () {})
+        IconButton(icon: Icon(Icons.arrow_upward), onPressed: exportAlcoholList)
       ],
       emptyListWidget: Center(
         child: Text("Click the add button to create your drink list"),
@@ -64,6 +64,13 @@ class _MyHomePageState extends State<MyHomePageState> {
           DocumentActionsButton(documentList, index: index),
         ],
       ),
+    );
+  }
+
+  void exportAlcoholList() {
+    showAboutDialog(
+      context: context,
+      applicationName: "my_alcohol_list",
     );
   }
 
