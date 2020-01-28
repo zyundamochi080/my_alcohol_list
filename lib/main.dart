@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePageState> {
     return DocumentListScaffold(
       documentList,
       additionalActions: <Widget>[
-        IconButton(icon: Icon(Icons.arrow_upward), onPressed: exportAlcoholList)
+        IconButton(icon: Icon(Icons.settings), onPressed: showAboutApp)
       ],
       emptyListWidget: Center(
         child: Text("Click the add button to create your drink list"),
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePageState> {
     );
   }
   
-  void exportAlcoholList() {
+  void showAboutApp() {
     PackageInfo.fromPlatform().then((packageInfo) {
       showAboutDialog(
         context: context,
