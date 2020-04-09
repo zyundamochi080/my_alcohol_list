@@ -30,8 +30,16 @@ class _MyHomePageState extends State<MyHomePageState> {
   Widget build(BuildContext context) {
     return DocumentListScaffold(
       documentList,
+        formDecoration:
+          BoxDecoration(color: Theme.of(context).colorScheme.background),
+            formFieldDecoration:
+          BoxDecoration(
+            border: Border.all(color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.all(Radius.circular(10),
+            ),
+          ),
       additionalActions: <Widget>[
-        IconButton(icon: Icon(Icons.arrow_upward), onPressed: exportAlcoholList)
+        IconButton(icon: Icon(Icons.settings), onPressed: showAboutApp)
       ],
       emptyListWidget: Center(
         child: Text("Click the add button to create your drink list"),
@@ -68,12 +76,12 @@ class _MyHomePageState extends State<MyHomePageState> {
     );
   }
   
-  void exportAlcoholList() {
+  void showAboutApp() {
     PackageInfo.fromPlatform().then((packageInfo) {
       showAboutDialog(
         context: context,
         applicationName: packageInfo.appName,
-        applicationVersion: packageInfo.version,
+        applicationVersion: "version:"+ packageInfo.version,
       );
     });
   }
